@@ -15,3 +15,25 @@ useage:
 
 
 <img width="643" height="173" alt="图片" src="https://github.com/user-attachments/assets/4737d686-ed59-4c17-aa3e-c1d06826f623" />
+
+
+location ~ /proxy/(.*) {
+            proxy_next_upstream error;
+            proxy_connect_timeout 100ms;
+            proxy_send_timeout 100ms;
+            proxy_read_timeout   200ms;
+
+            resolver 10.1.0.32 ipv6=off;
+            internal;
+            rewrite ^/proxy/([^/]+)/(.*)     /$2 break;
+
+            proxy_pass http://$1;
+            proxy_http_version 1.1;
+            proxy_set_header Connection "";
+        }
+
+location /logs/ {
+            default_type    text/plain;
+            root            /data;
+            autoindex       on;
+        }
