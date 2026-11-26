@@ -17,7 +17,8 @@ useage:
 <img width="643" height="173" alt="图片" src="https://github.com/user-attachments/assets/4737d686-ed59-4c17-aa3e-c1d06826f623" />
 
 
-location ~ /proxy/(.*) {
+
+       location ~ /proxy/(.*) {
             proxy_next_upstream error;
             proxy_connect_timeout 100ms;
             proxy_send_timeout 100ms;
